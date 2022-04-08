@@ -17,9 +17,9 @@ type identity struct {
 func main() {
 	var identities []identity
 	var lokerCount int
+	i := 0
 	for {
 		_, textArr := inputIdentities()
-
 		switch textArr[0] {
 		case "init":
 			if len(textArr) == 2 {
@@ -48,21 +48,19 @@ func main() {
 					fmt.Println("loker belum di inisialisasi")
 				}
 
-				for i := 1; i <= lokerCount; i++ {
-					if len(identities) >= lokerCount {
-						fmt.Println("loker penuh!")
-						break
-					}
-
-					var identity identity
-
-					identity.NoLoker = i
-					identity.NoIdentitas = textArr[2]
-					identity.TipeIdentitas = textArr[1]
-
-					identities = append(identities, identity)
-					fmt.Println("kartu identitas disimpan di loker nomor", i)
+				if len(identities) >= lokerCount {
+					fmt.Println("loker penuh!")
+					break
 				}
+
+				var identity identity
+				i++
+				identity.NoLoker = i
+				identity.NoIdentitas = textArr[2]
+				identity.TipeIdentitas = textArr[1]
+
+				identities = append(identities, identity)
+				fmt.Println("kartu identitas disimpan di loker nomor", identity.NoLoker)
 			} else {
 				fmt.Println("perintah salah!")
 			}
