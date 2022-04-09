@@ -44,22 +44,42 @@ func main() {
 			}
 		case "input":
 			if len(textArr) == 3 {
+				i++
+				var identity identity
+
 				if lokerCount <= 0 {
 					fmt.Println("loker belum di inisialisasi")
 				}
 
-				if len(identities) >= lokerCount {
+				if len(identities) > lokerCount {
 					fmt.Println("loker penuh!")
 					break
 				}
 
-				var identity identity
-				i++
+				if len(identities) == lokerCount {
+					for id := 0; id < len(identities); id++ {
+						if identities[id].NoLoker >= lokerCount {
+							fmt.Println("loker penuh!")
+							break
+						} else if identities[id] == identity {
+							identity.NoLoker = id + 1
+							identity.TipeIdentitas = textArr[1]
+							identity.NoIdentitas = textArr[2]
+
+							identities[id] = identity
+
+							fmt.Println("kartu identitas disimpan di loker nomor", identity.NoLoker)
+							break
+						}
+					}
+					break
+				}
+
 				identity.NoLoker = i
 				identity.NoIdentitas = textArr[2]
 				identity.TipeIdentitas = textArr[1]
-
 				identities = append(identities, identity)
+
 				fmt.Println("kartu identitas disimpan di loker nomor", identity.NoLoker)
 			} else {
 				fmt.Println("perintah salah!")
@@ -72,7 +92,12 @@ func main() {
 
 				intArr, _ := strconv.Atoi(textArr[1])
 				index := intArr - 1
-				identities = append(identities[:index], identities[index+1:]...)
+				if len(identities) > index {
+					identities[index] = identity{}
+				} else {
+					fmt.Println("nomor loker tidak ditemukan")
+					break
+				}
 
 				fmt.Println("loker nomor", intArr, "berhasil dikosongkan")
 			} else {

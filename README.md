@@ -8,6 +8,7 @@
     - **status** untuk memeriksa loker
     - **find[nomor_identitas]** untuk mencari nomor loker sesuai nomor identitas yang dicari
     - **search[tipe_identitas]** untuk mencari nomor identitas sesuai tipe identitas yang dicari 
+    - **leave[nomor_loker]** untuk mengosongkan loker
     - **exit** untuk mengkhiri program
 - Perintah bersifat case insensitive
 - Jika perintah tidak sesuai maka akan muncul peringatan
